@@ -1,0 +1,44 @@
+# API Proxy for TV Calendar App
+# This simple proxy handles Google Calendar API requests
+# because of CORS restrictions
+
+const express = require('express')
+const { google } = require('googleapis')
+const app = express()
+const port = 3001
+
+app.use(express.json())
+
+// Middleware to allow CORS
+app.use((req, res, next) > {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
+
+// Simple Google Calendar API proxy
+app.get('/api/calendar', async (req, res) > {
+  try {
+    const calendar = google.calendar({
+      version: 'v3',
+      auth: process.env.GOOGLE_API_KEY
+    })
+
+    const response = await calendar.events.list({
+      calendarId: process.env.CALENDAR_ID || 'primary',
+      timeMin: (new Date()).toISOString(),
+      maxResults: 20,
+      singleEvents: true,
+      orderBy: 'startTime'
+    })
+
+    res.json(response.data)
+  } catch (error) {
+    console.error('Error fetching calendar:', error)
+    res.status(500).json({ error: 'Failed to fetch calendar events' })
+  }
+})
+
+app.listen(port, () > {
+  console.log(`TV Calendar API proxy running on port ${port}`)
+})

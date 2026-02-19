@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root {
+  width: 1920px;
+  height: 1080px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.season-spring {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.season-summer {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.season-fall {
+  background: linear-gradient(135deg, #feac5e 0%, #c779d0 100%);
+}
+
+.season-winter {
+  background: linear-gradient(135deg, #83a4d4 0%, #b6fbff 100%);
+}
